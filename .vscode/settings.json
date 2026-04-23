@@ -1,4 +1,11 @@
 {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.requireConfig": true,
+    "[csharp]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-dotnettools.csharp"
+    },
     "files.exclude": {
         "**/.DS_Store": true,
         "**/.git": true,
@@ -66,6 +73,5 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
-    },
-    "dotnet.defaultSolution": "Isotope.slnx"
+    }
 }

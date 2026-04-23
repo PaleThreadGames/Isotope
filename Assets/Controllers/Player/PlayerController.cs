@@ -32,17 +32,39 @@ public class PlayerController : MonoBehaviour
 
 void FixedUpdate()
 {
-    // If we're in the air and hugging a wall, kill horizontal velocity 
-    // This stops the "friction" from sticking you to the wall
-    if (!isGrounded && IsTouchingWall())
+    float horizontalMove = moveInput.x * moveSpeed;
+
+    // Check for walls
+    bool touchingWall = IsTouchingWall();
+
+    // The Logic: If we are in the air AND touching a wall...
+    if (!isGrounded && touchingWall)
     {
-        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        // Check if we are trying to move TOWARDS the wall
+        // (Assuming you're using the BoxCast logic from before)
+        bool pushingIntoWall = (moveInput.x > 0 && IsWallToRight()) || (moveInput.x < 0 && IsWallToLeft());
+
+        if (pushingIntoWall)
+        {
+            // Set horizontal velocity to 0 so the physics engine doesn't "grip"
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        }
+        else
+        {
+            // Allow them to move AWAY from the wall freely
+            rb.linearVelocity = new Vector2(horizontalMove, rb.linearVelocity.y);
+        }
     }
     else
     {
-        rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
+        // Normal ground or air movement
+        rb.linearVelocity = new Vector2(horizontalMove, rb.linearVelocity.y);
     }
 }
+
+// Separate checks for left and right to see which way we are pushing
+bool IsWallToRight() => Physics2D.Raycast(transform.position, Vector2.right, 0.6f, groundLayer);
+bool IsWallToLeft() => Physics2D.Raycast(transform.position, Vector2.left, 0.6f, groundLayer);
 
 bool IsTouchingWall()
 {
@@ -58,6 +80,5 @@ bool IsTouchingWall()
     {
         // Ground check circle
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-        Debug.Log("Is Grounded: " + isGrounded + " Is Touching Wall: " + IsTouchingWall());
     }
 }

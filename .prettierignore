@@ -1,0 +1,8 @@
+Library/
+Logs/
+Temp/
+UserSettings/
+.vs/
+.vscode/
+Assets/**/*.meta
+ProjectSettings/
