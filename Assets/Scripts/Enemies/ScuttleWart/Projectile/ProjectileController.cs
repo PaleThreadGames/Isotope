@@ -21,7 +21,7 @@ public class ProjectileController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
         if (hitInfo.CompareTag("SmallEnemy")) return; 
-
+ 
         CancelInvoke("TimeoutDestroy");
 
         rb.linearVelocity = Vector2.zero;
