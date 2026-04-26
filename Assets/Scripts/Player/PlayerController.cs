@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour
+
 {
     [Header("Movement Settings")]
     public float moveSpeed = 8f;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;
     private bool isGrounded;
     private float originalGravity;
+    private float facingDirection = 1f;
 
     void Start() 
     {
@@ -34,6 +36,11 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+
+        if (moveInput.x != 0f)
+        {
+            facingDirection = Mathf.Sign(moveInput.x);
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -60,8 +67,8 @@ public class PlayerController : MonoBehaviour
         canDash = false;
         isDashing = true;
         
-        // Use current move direction, or face forward if idle
-        float dashDir = moveInput.x != 0 ? Mathf.Sign(moveInput.x) : transform.localScale.x;
+        // Dash in current move direction, or continue facing direction when idle
+        float dashDir = moveInput.x != 0f ? Mathf.Sign(moveInput.x) : facingDirection;
         
         rb.gravityScale = 0f; // Stay level during dash
         rb.linearVelocity = new Vector2(dashDir * dashForce, 0f);
