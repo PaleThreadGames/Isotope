@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, IDamageable
 {
     [Header("Atomic Integrity")]
     public int currentProtons = 3;
@@ -30,6 +30,12 @@ public class PlayerHealth : MonoBehaviour
     {
         currentProtons -= amount;
         if (currentProtons <= 0) Collapse();
+    }
+
+    void IDamageable.TakeDamage(float amount)
+    {
+        int dmg = Mathf.Max(1, Mathf.RoundToInt(amount));
+        TakeDamage(dmg);
     }
 
     void Collapse()
