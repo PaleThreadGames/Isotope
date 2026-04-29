@@ -28,10 +28,9 @@ public class ProjectileController : MonoBehaviour
         coll.enabled = false;
         anim.SetTrigger("Hit");
 
-        if (hitInfo.CompareTag("Player")) {
-            Debug.Log("Player was hit by the laser!");
-            // hitInfo.GetComponent<PlayerHealth>().TakeDamage(1);
-        }
+        IDamageable damageable = hitInfo.GetComponent<IDamageable>();
+        if (damageable != null)
+            damageable.TakeDamage(1f);
     }
 
     // Called by the Animation Event when the explosion finishes
