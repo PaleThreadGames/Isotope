@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Centralizes animator parameters and animation-driven callbacks (e.g. laser, death cleanup).
+/// Animator parameters and death handling. Attack payloads (projectiles, melee) live on enemy-specific components.
 /// </summary>
 [RequireComponent(typeof(Animator))]
 public class EnemyAnimatorBridge : MonoBehaviour
@@ -11,16 +11,6 @@ public class EnemyAnimatorBridge : MonoBehaviour
 
     [SerializeField]
     EnemyHealth health;
-
-    [Header("Laser (animation event -> FireLaser)")]
-    [SerializeField]
-    GameObject laserPrefab;
-
-    [SerializeField]
-    Transform firePoint;
-
-    [SerializeField]
-    float laserSpeed = 10f;
 
     static readonly int SpeedHash = Animator.StringToHash("Speed");
     static readonly int AttackHash = Animator.StringToHash("Attack");
@@ -32,11 +22,8 @@ public class EnemyAnimatorBridge : MonoBehaviour
             animator = GetComponent<Animator>();
     }
 
-    public void ApplyBindings(GameObject laser, Transform fire, float speed, EnemyHealth healthRef)
+    public void ApplyBindings(EnemyHealth healthRef)
     {
-        laserPrefab = laser;
-        firePoint = fire;
-        laserSpeed = speed;
         health = healthRef;
     }
 
@@ -77,27 +64,7 @@ public class EnemyAnimatorBridge : MonoBehaviour
         animator.SetTrigger(AttackHash);
     }
 
-    /// <summary>Called from Attack animation event.</summary>
-    public void FireLaser()
-    {
-        if (laserPrefab == null || firePoint == null)
-            return;
-
-        GameObject spawnedLaser = Instantiate(laserPrefab, firePoint.position, Quaternion.identity);
-        float facingDirection = transform.localScale.x > 0f ? 1f : -1f;
-        Rigidbody2D laserRb = spawnedLaser.GetComponent<Rigidbody2D>();
-        if (laserRb != null)
-            laserRb.linearVelocity = new Vector2(facingDirection * laserSpeed, 0f);
-
-        if (facingDirection < 0f)
-        {
-            Vector3 laserScale = spawnedLaser.transform.localScale;
-            laserScale.x *= -1f;
-            spawnedLaser.transform.localScale = laserScale;
-        }
-    }
-
-    /// <summary>Called from death animation event.</summary>
+    /// <summary>Called from death animation event (same GameObject as Animator).</summary>
     public void HandleDeathCleanup()
     {
         Destroy(gameObject);

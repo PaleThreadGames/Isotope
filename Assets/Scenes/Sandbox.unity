@@ -413,7 +413,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5.625
+  orthographic size: 0.5113636
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -3649,6 +3649,7 @@ GameObject:
   - component: {fileID: 775261354}
   - component: {fileID: 775261356}
   - component: {fileID: 775261355}
+  - component: {fileID: 775261357}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -3940,6 +3941,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.985872, y: 1.6226081}
   m_EdgeRadius: 0
+--- !u!114 &775261357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775261348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e9e924de73b1c249b0d61ae884236fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerTargetBinder
+  playerReference: {fileID: 11400000, guid: 6a069c1711b7cd24a8696fe60e70904f, type: 2}
 --- !u!1 &1318217046
 GameObject:
   m_ObjectHideFlags: 0

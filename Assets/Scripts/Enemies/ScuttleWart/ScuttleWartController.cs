@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Thin orchestrator: wires shared components, legacy inspector fields, and animation event forwards.
+/// Thin orchestrator: wires shared components. Attack animation events target <see cref="ScuttleWartProjectileAttack"/>; death cleanup targets <see cref="EnemyAnimatorBridge"/>.
 /// </summary>
 [DefaultExecutionOrder(-50)]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -10,6 +10,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyPerception))]
 [RequireComponent(typeof(EnemyGroundMovement))]
 [RequireComponent(typeof(EnemyAnimatorBridge))]
+[RequireComponent(typeof(ScuttleWartProjectileAttack))]
 public class ScuttleWartController : MonoBehaviour
 {
     [Header("Optional ScriptableObject configs")]
@@ -79,16 +80,6 @@ public class ScuttleWartController : MonoBehaviour
     [SerializeField]
     float patrolWaitTime = 2f;
 
-    [Header("Attack Settings")]
-    [SerializeField]
-    GameObject laserPrefab;
-
-    [SerializeField]
-    Transform firePoint;
-
-    [SerializeField]
-    float laserSpeed = 10f;
-
     EnemyHealth _enemyHealth;
     EnemyPerception _perception;
     EnemyGroundMovement _motor;
@@ -128,7 +119,7 @@ public class ScuttleWartController : MonoBehaviour
             groundCheckDistance,
             patrolWaitTime);
 
-        _animBridge.ApplyBindings(laserPrefab, firePoint, laserSpeed, _enemyHealth);
+        _animBridge.ApplyBindings(_enemyHealth);
 
         _brain = new ScuttleWartBrain(_perception, _motor, _animBridge, _enemyHealth, playerReference);
     }
@@ -160,18 +151,6 @@ public class ScuttleWartController : MonoBehaviour
             playerRb.linearVelocity = Vector2.zero;
             playerRb.AddForce(knockbackVector * knock, ForceMode2D.Impulse);
         }
-    }
-
-    /// <summary>Animation event forward (same signature as before).</summary>
-    public void FireLaser()
-    {
-        _animBridge.FireLaser();
-    }
-
-    /// <summary>Animation event forward.</summary>
-    public void HandleDeathCleanup()
-    {
-        _animBridge.HandleDeathCleanup();
     }
 
 #if UNITY_EDITOR

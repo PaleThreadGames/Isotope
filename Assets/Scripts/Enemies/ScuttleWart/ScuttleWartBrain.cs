@@ -51,7 +51,12 @@ public class ScuttleWartBrain
 
         Transform player = _playerRef != null ? _playerRef.Target : null;
         if (player == null)
+        {
+            CurrentState = State.Patrolling;
+            _motor.PatrolFixedUpdate();
+            _anim.SetLocomotionSpeed(_motor.IsPatrolWaiting ? 0f : 1f);
             return;
+        }
 
         PerceptionSnapshot snap = _perception.Tick(player);
         float dist = snap.DistanceToPlayer;

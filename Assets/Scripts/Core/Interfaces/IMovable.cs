@@ -13,6 +13,4 @@ public interface IMovable
     bool ChaseFixedUpdate(Transform target, bool retreating);
     void StopHorizontal();
     void PrepareAttackFacing(Transform target);
-
-    bool IsPatrolWaiting { get; }
 }
