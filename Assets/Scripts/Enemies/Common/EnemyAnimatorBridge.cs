@@ -51,8 +51,14 @@ public class EnemyAnimatorBridge : MonoBehaviour
         }
     }
 
-    public bool IsMovementLockedByAttackAnimator =>
-        animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") || animator.IsInTransition(0);
+    public bool IsMovementLockedByAttackAnimator
+    {
+        get
+        {
+            AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+            return state.IsName("Attack") || state.IsName("Spawn") || animator.IsInTransition(0);
+        }
+    }
 
     public void SetLocomotionSpeed(float speed)
     {
