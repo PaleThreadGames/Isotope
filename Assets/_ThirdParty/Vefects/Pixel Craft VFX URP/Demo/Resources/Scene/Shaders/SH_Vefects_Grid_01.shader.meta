@@ -15,5 +15,5 @@ AssetOrigin:
   productId: 308259
   packageName: Pixel Craft VFX - URP
   packageVersion: 1.0.03
-  assetPath: Assets/Vefects/Pixel Craft VFX URP/Demo/Resources/Scene/Shaders/SH_Vefects_Grid_01.shader
+  assetPath: Assets/_ThirdParty/Vefects/Pixel Craft VFX URP/Demo/Resources/Scene/Shaders/SH_Vefects_Grid_01.shader
   uploadId: 771746

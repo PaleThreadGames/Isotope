@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Defines a tile-space region that can surface a ScuttleWart from the ground.
@@ -8,6 +8,9 @@ public class ScuttleWartSpawnZone : MonoBehaviour
 {
     [SerializeField]
     GameObject scuttleWartPrefab;
+
+    [SerializeField]
+    GameObject spawnVfxPrefab;
 
     [SerializeField]
     bool spawnOnStart = true;
@@ -43,6 +46,12 @@ public class ScuttleWartSpawnZone : MonoBehaviour
 
         _hasSpawned = true;
         Vector3 position = GetSpawnPosition();
+        
+        if (spawnVfxPrefab != null)
+        {
+            Instantiate(spawnVfxPrefab, position, Quaternion.identity);
+        }
+
         GameObject spawned = Instantiate(scuttleWartPrefab, position, Quaternion.identity);
         spawned.name = scuttleWartPrefab.name;
 

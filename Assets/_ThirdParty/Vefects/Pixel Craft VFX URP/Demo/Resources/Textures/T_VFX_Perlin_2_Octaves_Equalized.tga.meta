@@ -126,5 +126,5 @@ AssetOrigin:
   productId: 308259
   packageName: Pixel Craft VFX - URP
   packageVersion: 1.0.03
-  assetPath: Assets/Vefects/Pixel Craft VFX URP/Demo/Resources/Textures/T_VFX_Perlin_2_Octaves_Equalized.tga
+  assetPath: Assets/_ThirdParty/Vefects/Pixel Craft VFX URP/Demo/Resources/Textures/T_VFX_Perlin_2_Octaves_Equalized.tga
   uploadId: 771746
