@@ -16,6 +16,6 @@ MonoBehaviour:
   patrolSpeedMultiplier: 0.5
   retreatSpeedMultiplier: 0.75
   flipDeadzone: 0.5
-  groundCheckDistance: 0.5
+  groundCheckDistance: 1
   patrolWaitTime: 2
   minRigidbodyMass: 100

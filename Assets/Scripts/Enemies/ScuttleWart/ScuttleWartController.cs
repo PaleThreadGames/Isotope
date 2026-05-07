@@ -136,7 +136,7 @@ public class ScuttleWartController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.CompareTag("Player"))
+        if (_enemyHealth.IsDead || !collision.gameObject.CompareTag("Player"))
             return;
 
         _enemyHealth.TakeDamage(1f);

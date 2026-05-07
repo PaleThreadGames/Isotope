@@ -16,6 +16,9 @@ public class EnemyAnimatorBridge : MonoBehaviour
     static readonly int AttackHash = Animator.StringToHash("Attack");
     static readonly int IsDeadHash = Animator.StringToHash("isDead");
 
+    [SerializeField]
+    bool disablePhysicsOnDeath = true;
+
     void Awake()
     {
         if (animator == null)
@@ -43,11 +46,14 @@ public class EnemyAnimatorBridge : MonoBehaviour
     {
         animator.SetBool(IsDeadHash, true);
 
-        var rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
+        if (disablePhysicsOnDeath)
         {
-            rb.linearVelocity = Vector2.zero;
-            rb.simulated = false;
+            var rb = GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;
+                rb.simulated = false;
+            }
         }
     }
 

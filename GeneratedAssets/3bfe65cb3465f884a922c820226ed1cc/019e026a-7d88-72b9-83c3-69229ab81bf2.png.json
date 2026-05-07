@@ -1,0 +1,28 @@
+{
+    "asset": "3bfe65cb3465f884a922c820226ed1cc",
+    "fileName": "019e026a-7d88-72b9-83c3-69229ab81bf2.png",
+    "prompt": "A 2D pixel art sci-fi door for a Metroidvania game. Metallic, slightly weathered, glowing blue details. Closed state. 16-bit style, clean lines, high contrast. Front view, isolated on white background.",
+    "negativePrompt": "",
+    "model": "gpt-image-1",
+    "modelName": "GPT Image 1",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0
+}

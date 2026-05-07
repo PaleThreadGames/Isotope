@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "unity-official": {
+      "command": "C:\\Users\\KyleM\\.unity\\relay\\relay_win.exe",
+      "args": [
+        "--mcp",
+        "--project-path",
+        "D:\\projects\\PaleThreadGames\\games\\Isotope"
+      ]
+    }
+  }
+}
